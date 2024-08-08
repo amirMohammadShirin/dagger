@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.sweet.dagger.di.CommandRouterFactory
+import com.sweet.dagger.di.DaggerCommandRouterFactory
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,13 +19,16 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        startWithoutUi("")
+        startWithoutUi("transfer money")
 
     }
 
     private fun startWithoutUi(input: String) {
 
+        val commandRouterFactory = DaggerCommandRouterFactory.create()
+        val commandRouter = commandRouterFactory.router()
 
+        commandRouter.route(input)
 
     }
 }
