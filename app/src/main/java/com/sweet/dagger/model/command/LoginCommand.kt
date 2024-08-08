@@ -1,17 +1,24 @@
 package com.sweet.dagger.model.command
 
+import com.sweet.dagger.database.Database
 import com.sweet.dagger.model.OutPutter
 import com.sweet.dagger.model.Result
 import com.sweet.dagger.model.SingleArgCommand
 import javax.inject.Inject
 
 class LoginCommand @Inject constructor(
-    private val outPutter: OutPutter
+    private val outPutter: OutPutter,
+    private val database: Database
 ) : SingleArgCommand() {
 
     override fun handleInput(input: String): Result {
-        outPutter.print("$input is logged in. ")
-        return Result.Handled()
+        val account = database.getAccount(input)
+        account?.let { nonNullAccount ->
+            outPutter.print("$input is logged in with balance ${nonNullAccount.balance}$ . ")
+            return Result.Handled()
+        } ?: run {
+            return Result.Invalid()
+        }
     }
 
     override fun key(): String = "login"
