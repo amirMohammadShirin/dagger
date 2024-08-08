@@ -1,12 +1,13 @@
 package com.sweet.dagger.di
 
-import com.sweet.dagger.model.CommandRouter
+import com.sweet.dagger.model.router.CommandRouter
 import dagger.Component
 
 @Component(
     modules = [
         LoginModule::class,
         OutPutterModule::class,
+        HelloWordModule::class
     ]
 )
 interface CommandRouterFactory {

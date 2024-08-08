@@ -2,6 +2,7 @@ package com.sweet.dagger.model.command
 
 import com.sweet.dagger.model.OutPutter
 import com.sweet.dagger.model.Result
+import com.sweet.dagger.model.SingleArgCommand
 import javax.inject.Inject
 
 class LoginCommand @Inject constructor(

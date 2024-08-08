@@ -5,7 +5,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.sweet.dagger.di.CommandRouterFactory
 import com.sweet.dagger.di.DaggerCommandRouterFactory
 
 class MainActivity : AppCompatActivity() {
@@ -19,8 +18,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        startWithoutUi("login|amir")
-
+        startWithoutUi("hello|world")
     }
 
     private fun startWithoutUi(input: String) {

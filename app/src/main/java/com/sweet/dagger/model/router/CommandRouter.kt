@@ -1,19 +1,17 @@
-package com.sweet.dagger.model
+package com.sweet.dagger.model.router
 
 import com.sweet.dagger.extension.split
+import com.sweet.dagger.model.Command
+import com.sweet.dagger.model.OutPutter
+import com.sweet.dagger.model.Result
+import com.sweet.dagger.model.Status
 import javax.inject.Inject
 
 
 class CommandRouter @Inject constructor(
-    command: Command,
+    private val commands: MutableMap<String, Command>,
     private val outPutter: OutPutter
 ) {
-
-    private val commands: MutableMap<String, Command> = mutableMapOf()
-
-    init {
-        commands[command.key()] = command
-    }
 
     fun route(input: String): Result {
         val spiltInput = input.split()
