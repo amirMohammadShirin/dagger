@@ -1,11 +1,12 @@
 package com.sweet.dagger.model
 
 import com.sweet.dagger.extension.split
+import javax.inject.Inject
 
 
-class CommandRouter(
+class CommandRouter @Inject constructor() {
+
     private val commands: Map<String, Command> = mapOf()
-) {
 
     fun route(input: String): Result {
         val spiltInput = input.split()
