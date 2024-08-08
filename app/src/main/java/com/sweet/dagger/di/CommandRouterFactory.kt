@@ -4,7 +4,10 @@ import com.sweet.dagger.model.CommandRouter
 import dagger.Component
 
 @Component(
-    modules = [HelloWordModule::class]
+    modules = [
+        HelloWordModule::class,
+        OutPutterModule::class
+    ]
 )
 interface CommandRouterFactory {
 
