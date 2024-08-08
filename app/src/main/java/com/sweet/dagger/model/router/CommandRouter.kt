@@ -9,15 +9,9 @@ import javax.inject.Inject
 
 
 class CommandRouter @Inject constructor(
-    command: Command,
+    private val commands: MutableMap<String, Command>,
     private val outPutter: OutPutter
 ) {
-
-    private val commands: MutableMap<String, Command> = mutableMapOf()
-
-    init {
-        commands[command.key()] = command
-    }
 
     fun route(input: String): Result {
         val spiltInput = input.split()
