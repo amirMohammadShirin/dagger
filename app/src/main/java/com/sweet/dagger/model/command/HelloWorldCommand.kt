@@ -2,8 +2,9 @@ package com.sweet.dagger.model.command
 
 import com.sweet.dagger.model.Command
 import com.sweet.dagger.model.Result
+import javax.inject.Inject
 
-class HelloWorldCommand : Command {
+class HelloWorldCommand @Inject constructor() : Command {
 
     override fun key() = "hello"
 
