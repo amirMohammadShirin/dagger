@@ -4,6 +4,6 @@ import com.sweet.dagger.model.OutPutter
 
 class SystemOutPutter : OutPutter {
     override fun print(output: String) {
-        println(output)
+        println("ATM Response : $output")
     }
 }
