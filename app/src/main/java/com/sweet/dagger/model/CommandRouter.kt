@@ -4,9 +4,15 @@ import com.sweet.dagger.extension.split
 import javax.inject.Inject
 
 
-class CommandRouter @Inject constructor() {
+class CommandRouter @Inject constructor(
+    command: Command
+) {
 
-    private val commands: Map<String, Command> = mapOf()
+    private val commands: MutableMap<String, Command> = mutableMapOf()
+
+    init {
+        commands[command.key()] = command
+    }
 
     fun route(input: String): Result {
         val spiltInput = input.split()
