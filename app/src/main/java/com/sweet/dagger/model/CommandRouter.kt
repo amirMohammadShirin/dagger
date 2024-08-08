@@ -24,7 +24,7 @@ class CommandRouter @Inject constructor() {
 
     private fun invalidCommand(input: String): Result {
         println("ATM Response : Could not understand \"$input\". Please try again.")
-        return Result(Status.INVALID)
+        return Result.Invalid()
     }
 
 }

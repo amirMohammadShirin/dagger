@@ -1,11 +1,10 @@
 package com.sweet.dagger.model
 
-data class Result(
-    val status: Status
-) {
+sealed class Result private constructor(val status: Status) {
 
-    fun invalid(): Result = this.copy(status = Status.INVALID)
+    class Invalid() : Result(Status.INVALID)
 
-    fun handled(): Result = this.copy(status = Status.HANDLED)
+    class Handled() : Result(Status.HANDLED)
+
 
 }
