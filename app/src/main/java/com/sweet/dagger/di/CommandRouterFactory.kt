@@ -5,8 +5,8 @@ import dagger.Component
 
 @Component(
     modules = [
-        HelloWordModule::class,
-        OutPutterModule::class
+        LoginModule::class,
+        OutPutterModule::class,
     ]
 )
 interface CommandRouterFactory {
