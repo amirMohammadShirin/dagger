@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        startWithoutUi("transfer money")
+        startWithoutUi("login|amir")
 
     }
 

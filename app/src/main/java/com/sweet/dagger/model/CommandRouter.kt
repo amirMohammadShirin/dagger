@@ -5,7 +5,8 @@ import javax.inject.Inject
 
 
 class CommandRouter @Inject constructor(
-    command: Command
+    command: Command,
+    private val outPutter: OutPutter
 ) {
 
     private val commands: MutableMap<String, Command> = mutableMapOf()
@@ -23,13 +24,12 @@ class CommandRouter @Inject constructor(
 
         val args = spiltInput.subList(1, spiltInput.size)
         val result = command.handleInput(args)
-        println("ATM Response : Loading \"$input\" command ...")
         return if (result.status == Status.INVALID) invalidCommand(input) else result
 
     }
 
     private fun invalidCommand(input: String): Result {
-        println("ATM Response : Could not understand \"$input\". Please try again.")
+        outPutter.print("Could not understand \"$input\". Please try again.")
         return Result.Invalid()
     }
 

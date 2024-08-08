@@ -13,7 +13,7 @@ class HelloWorldCommand @Inject constructor(
 
     override fun handleInput(input: List<String>): Result {
         return if (input.isEmpty()) Result.Invalid() else Result.Handled().also {
-            outPutter.print("ATM Response : Word")
+            outPutter.print("Word")
         }
     }
 }
