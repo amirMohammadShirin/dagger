@@ -1,4 +1,6 @@
-package com.sweet.dagger
+package com.sweet.dagger.model
+
+import com.sweet.dagger.extension.split
 
 
 class CommandRouter(

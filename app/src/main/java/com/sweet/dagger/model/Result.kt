@@ -1,4 +1,4 @@
-package com.sweet.dagger
+package com.sweet.dagger.model
 
 data class Result(
     val status: Status

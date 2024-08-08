@@ -1,4 +1,4 @@
-package com.sweet.dagger
+package com.sweet.dagger.model
 
 enum class Status {
     INVALID,HANDLED
