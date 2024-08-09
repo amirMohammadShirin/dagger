@@ -1,5 +1,6 @@
 package com.sweet.dagger.model.router
 
+import com.sweet.dagger.model.Result
 import com.sweet.dagger.model.Status
 import java.util.ArrayDeque
 import java.util.Deque
@@ -17,16 +18,16 @@ class CommandProcessor @Inject constructor(
         commandRouterStack.push(commandsRouter)
     }
 
-    fun process(input: String): Status {
+    fun process(input: String): Result {
         val result = commandRouterStack.peek()?.route(input)
         if (result?.status == Status.COMPLETED) {
             commandRouterStack.pop()
-            return if (commandRouterStack.isEmpty()) Status.COMPLETED else Status.HANDLED
+            return if (commandRouterStack.isEmpty()) Result.Completed() else Result.Handled()
         }
         result?.nestedCommandRouter?.let {
             commandRouterStack.push(it)
         }
-        return result?.status ?: Status.INVALID
+        return result ?: Result.Invalid()
     }
 
 }

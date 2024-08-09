@@ -11,7 +11,7 @@ class Database @Inject constructor() {
     private val accounts: MutableMap<String, Account> = mutableMapOf()
 
     init {
-        accounts["amir"] = Account("amir", BigDecimal(50))
+        accounts["guest"] = Account("guest", BigDecimal.ZERO)
     }
 
     fun getAccount(id: String): Account? = accounts[id]
