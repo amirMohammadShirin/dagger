@@ -9,4 +9,8 @@ data class Account(
     fun deposit(amount: BigDecimal): Account = this.copy(
         balance = balance.add(amount)
     )
+
+    fun withdraw(amount: BigDecimal): Account = this.copy(
+        balance = balance.subtract(amount)
+    )
 }

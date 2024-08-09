@@ -1,7 +1,7 @@
 package com.sweet.dagger.model.router
 
 import com.sweet.dagger.extension.split
-import com.sweet.dagger.model.Command
+import com.sweet.dagger.model.command.Command
 import com.sweet.dagger.model.OutPutter
 import com.sweet.dagger.model.Result
 import com.sweet.dagger.model.Status
