@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var commandProcessor: CommandProcessor
     private lateinit var btnProcess: Button
     private lateinit var edCommand: EditText
+    private lateinit var txtResponse: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,16 +36,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListeners() {
         btnProcess.setOnClickListener {
-            if (this::commandProcessor.isInitialized)
-                commandProcessor.process(edCommand.text.toString())
+            if (this::commandProcessor.isInitialized) {
+                val status = commandProcessor.process(edCommand.text.toString())
+                txtResponse.text = status.message
+            }
         }
     }
 
     private fun initViews() {
         btnProcess = findViewById(R.id.btnProcess)
         edCommand = findViewById(R.id.edCommand)
-
-        edCommand.setText("login amir")
+        txtResponse = findViewById(R.id.txtResponse)
     }
 
     private fun initDaggerComponents() {

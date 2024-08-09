@@ -1,16 +1,14 @@
 package com.sweet.dagger.model.router
 
 import com.sweet.dagger.extension.split
-import com.sweet.dagger.model.command.Command
-import com.sweet.dagger.model.OutPutter
 import com.sweet.dagger.model.Result
 import com.sweet.dagger.model.Status
+import com.sweet.dagger.model.command.Command
 import javax.inject.Inject
 
 
 class CommandRouter @Inject constructor(
-    private val commands: MutableMap<String, Command>,
-    private val outPutter: OutPutter
+    private val commands: MutableMap<String, Command>
 ) {
 
     fun route(input: String): Result {
@@ -22,13 +20,13 @@ class CommandRouter @Inject constructor(
 
         val args = spiltInput.subList(1, spiltInput.size)
         val result = command.handleInput(args)
-        return if (result.status == Status.INVALID) invalidCommand(input) else result
+        return if (result.status == Status.INVALID && result.message.isEmpty()) invalidCommand(input)
+        else result
 
     }
 
     private fun invalidCommand(input: String): Result {
-        outPutter.print("Could not understand \"$input\". Please try again.")
-        return Result.Invalid()
+        return Result.Invalid(message = "Could not understand \"$input\". Please try again.")
     }
 
 }

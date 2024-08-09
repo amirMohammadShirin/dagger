@@ -8,8 +8,6 @@ import javax.inject.Singleton
 @Component(
     modules = [
         LoginModule::class,
-        OutPutterModule::class,
-        HelloWordModule::class,
         UserCommandsRouter.InstallationModule::class,
         AmountModule::class
     ]
