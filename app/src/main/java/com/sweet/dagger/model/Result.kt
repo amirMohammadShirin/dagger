@@ -1,10 +1,20 @@
 package com.sweet.dagger.model
 
-sealed class Result private constructor(val status: Status) {
+import com.sweet.dagger.model.router.CommandRouter
 
-    class Invalid() : Result(Status.INVALID)
+sealed class Result private constructor(
+    val status: Status,
+    val nestedCommandRouter: CommandRouter? = null,
+) {
 
-    class Handled() : Result(Status.HANDLED)
+    class Invalid(nestedCommandRouter: CommandRouter? = null) :
+        Result(Status.INVALID, nestedCommandRouter)
+
+    class Handled(nestedCommandRouter: CommandRouter? = null) :
+        Result(Status.HANDLED, nestedCommandRouter)
+
+    class Completed(nestedCommandRouter: CommandRouter? = null) :
+        Result(Status.COMPLETED, nestedCommandRouter)
 
 
 }

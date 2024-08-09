@@ -1,21 +1,20 @@
 package com.sweet.dagger.di
 
-import com.sweet.dagger.model.router.CommandRouter
+import com.sweet.dagger.model.router.CommandProcessor
 import dagger.Component
 import javax.inject.Singleton
 
-
+@Singleton
 @Component(
     modules = [
         LoginModule::class,
         OutPutterModule::class,
         HelloWordModule::class,
-        UserCommandModule::class
+        UserCommandsRouter.InstallationModule::class
     ]
 )
-@Singleton
-interface CommandRouterFactory {
+interface CommandProcessorFactory {
 
-    fun router(): CommandRouter
+    fun processor(): CommandProcessor
 
 }
