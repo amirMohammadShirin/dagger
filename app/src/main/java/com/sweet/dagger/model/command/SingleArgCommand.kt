@@ -1,4 +1,6 @@
-package com.sweet.dagger.model
+package com.sweet.dagger.model.command
+
+import com.sweet.dagger.model.Result
 
 abstract class SingleArgCommand : Command {
 
