@@ -3,46 +3,52 @@ package com.sweet.dagger
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.postDelayed
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.sweet.dagger.di.DaggerCommandRouterFactory
-import com.sweet.dagger.model.router.CommandRouter
+import com.sweet.dagger.di.DaggerCommandProcessorFactory
+import com.sweet.dagger.model.router.CommandProcessor
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var commandRouter: CommandRouter
+    private lateinit var commandProcessor: CommandProcessor
+    private lateinit var btnProcess: Button
+    private lateinit var edCommand: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
+
+        initViews()
+        setListeners()
         initDaggerComponents()
 
     }
 
-    private fun initDaggerComponents() {
-        val commandRouterFactory = DaggerCommandRouterFactory.create()
-        commandRouter = commandRouterFactory.router()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        startWithoutUi("deposit amir 500")
-    }
-
-    private fun startWithoutUi(input: String) {
-        commandRouter.route(input)
-        Handler(Looper.getMainLooper()).postDelayed(1000) {
-            commandRouter.route("login amir")
+    private fun setListeners() {
+        btnProcess.setOnClickListener {
+            if (this::commandProcessor.isInitialized)
+                commandProcessor.process(edCommand.text.toString())
         }
     }
+
+    private fun initViews() {
+        btnProcess = findViewById(R.id.btnProcess)
+        edCommand = findViewById(R.id.edCommand)
+
+        edCommand.setText("login amir")
+    }
+
+    private fun initDaggerComponents() {
+        val commandRouterFactory = DaggerCommandProcessorFactory.create()
+        commandProcessor = commandRouterFactory.processor()
+    }
+
 }
