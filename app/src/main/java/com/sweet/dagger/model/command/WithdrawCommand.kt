@@ -24,34 +24,39 @@ class WithdrawCommand @Inject constructor(
     override fun handleAmount(value: BigDecimal): Result {
 
         if (value > withdrawalLimiter.remainingWithdrawalLimit) {
-            outPutter.print(
-                "you may not withdraw $value; you may withdraw ${withdrawalLimiter.remainingWithdrawalLimit} more in this session",
-            )
-            return Result.Invalid()
+            return Result.Invalid(
+                message = "you may not withdraw $value; you may withdraw ${withdrawalLimiter.remainingWithdrawalLimit} more in this session",
+            ).also {
+                outPutter.print(it.message)
+            }
         }
 
         if (value > maxAmount) {
-            outPutter.print("Max amount error")
-            return Result.Invalid()
+            return Result.Invalid(message = "Max amount error").also {
+                outPutter.print(it.message)
+            }
         }
 
         if (value < minAmount) {
-            outPutter.print("Min amount error")
-            return Result.Invalid()
+            return Result.Invalid(message = "Min amount error").also {
+                outPutter.print(it.message)
+            }
         }
 
         val newBalance = account.balance.subtract(value)
 
         if (newBalance.signum() < 0) {
-            outPutter.print("Your account balance is insufficient")
-            return Result.Invalid()
+            return Result.Invalid(message = "Your account balance is insufficient").also {
+                outPutter.print(it.message)
+            }
         }
 
         val newAccount = account.withdraw(value)
         withdrawalLimiter.recordWithdrawal(value)
-        outPutter.print("${newAccount.id} now has ${newAccount.balance}$ ")
         database.upsertAccount(newAccount)
-        return Result.Handled()
+        return Result.Handled(message = "${newAccount.id} now has ${newAccount.balance}$ ").also {
+            outPutter.print(it.message)
+        }
     }
 
     override fun key() = "withdraw"

@@ -24,8 +24,9 @@ class DepositCommand @Inject constructor(
         val newAccount = account.deposit(BigDecimal(input[0]))
         database.upsertAccount(newAccount)
         withdrawalLimiter.recordDeposit(BigDecimal(input[0]))
-        outPutter.print("${newAccount.id} now has ${newAccount.balance}$ ")
-        return Result.Handled()
+        val message = "${newAccount.id} now has ${newAccount.balance}$ "
+        outPutter.print(message)
+        return Result.Handled(message = message)
 
 
     }

@@ -11,8 +11,11 @@ class HelloWorldCommand @Inject constructor(
     override fun key() = "hello"
 
     override fun handleInput(input: List<String>): Result {
-        return if (input.isEmpty()) Result.Invalid() else Result.Handled().also {
-            outPutter.print("Word")
+        return if (input.isEmpty()) Result.Invalid() else {
+            val message = "Word"
+            Result.Handled(message = message).also {
+                outPutter.print(message)
+            }
         }
     }
 }

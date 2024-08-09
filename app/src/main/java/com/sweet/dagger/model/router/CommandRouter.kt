@@ -27,8 +27,9 @@ class CommandRouter @Inject constructor(
     }
 
     private fun invalidCommand(input: String): Result {
-        outPutter.print("Could not understand \"$input\". Please try again.")
-        return Result.Invalid()
+        return Result.Invalid(message = "Could not understand \"$input\". Please try again.").also {
+            outPutter.print(it.message)
+        }
     }
 
 }

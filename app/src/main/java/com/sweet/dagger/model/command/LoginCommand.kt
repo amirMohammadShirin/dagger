@@ -17,15 +17,20 @@ class LoginCommand @Inject constructor(
 
     override fun handleInput(input: String): Result {
 
-        if (account.isPresent) return Result.Handled().also {
-            outPutter.print("A user is already logged in")
+
+        if (account.isPresent) {
+            return Result.Handled(message = "A user is already logged in").also {
+                outPutter.print(it.message)
+            }
         }
 
         val account = database.getAccount(input)
         account?.let { nonNullAccount ->
-            outPutter.print("$input is logged in with balance ${nonNullAccount.balance}$ . ")
+            val message = "$input is logged in with balance ${nonNullAccount.balance}$ . "
+            outPutter.print(message)
             return Result.Handled(
-                userCommandsRouterFactory.create(account).router()
+                userCommandsRouterFactory.create(account).router(),
+                message = message
             )
         } ?: run {
             return Result.Invalid()

@@ -17,11 +17,13 @@ class LogoutCommand @Inject constructor(
         return try {
             val username = input[0]
             if (username == account.get().id) {
-                outPutter.print("User with username \"$username\" logged out.")
-                Result.Completed()
+                Result.Completed(message = "User with username \"$username\" logged out.").also {
+                    outPutter.print(it.message)
+                }
             } else {
-                outPutter.print("incorrect username.")
-                Result.Invalid()
+                Result.Invalid(message = "incorrect username.").also {
+                    outPutter.print(it.message)
+                }
             }
         } catch (e: Exception) {
             Result.Invalid()
