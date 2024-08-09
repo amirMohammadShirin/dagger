@@ -2,6 +2,7 @@ package com.sweet.dagger.di
 
 import com.sweet.dagger.model.command.Command
 import com.sweet.dagger.model.command.DepositCommand
+import com.sweet.dagger.model.command.LogoutCommand
 import com.sweet.dagger.model.command.WithdrawCommand
 import dagger.Binds
 import dagger.Module
@@ -19,6 +20,11 @@ abstract class UserCommandModule {
     @Binds
     @IntoMap
     @StringKey("withdraw")
-    abstract fun bindWithdrawCommand(withdrawCommand: WithdrawCommand):Command
+    abstract fun bindWithdrawCommand(withdrawCommand: WithdrawCommand): Command
+
+    @Binds
+    @IntoMap
+    @StringKey("logout")
+    abstract fun bindLogoutCommand(logoutCommand: LogoutCommand): Command
 
 }
