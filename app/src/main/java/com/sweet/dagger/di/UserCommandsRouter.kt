@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
 
+@PerSession
 @Subcomponent(
     modules = [UserCommandModule::class]
 )

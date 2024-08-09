@@ -8,7 +8,7 @@ abstract class BigDecimalCommand : Command {
     override fun handleInput(input: List<String>): Result {
         try {
             if (input.isNotEmpty())
-                return handleAmount(BigDecimal(input[1]))
+                return handleAmount(BigDecimal(input[0]))
             return Result.Invalid()
         } catch (e: Exception) {
             e.printStackTrace()
