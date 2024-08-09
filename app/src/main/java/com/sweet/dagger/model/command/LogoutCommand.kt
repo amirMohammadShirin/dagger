@@ -1,13 +1,11 @@
 package com.sweet.dagger.model.command
 
 import com.sweet.dagger.model.Account
-import com.sweet.dagger.model.OutPutter
 import com.sweet.dagger.model.Result
 import java.util.Optional
 import javax.inject.Inject
 
 class LogoutCommand @Inject constructor(
-    private val outPutter: OutPutter,
     private val account: Optional<Account>,
 ) : Command {
 
@@ -17,13 +15,9 @@ class LogoutCommand @Inject constructor(
         return try {
             val username = input[0]
             if (username == account.get().id) {
-                Result.Completed(message = "User with username \"$username\" logged out.").also {
-                    outPutter.print(it.message)
-                }
+                Result.Completed(message = "User with username \"$username\" logged out.")
             } else {
-                Result.Invalid(message = "incorrect username.").also {
-                    outPutter.print(it.message)
-                }
+                Result.Invalid(message = "incorrect username.")
             }
         } catch (e: Exception) {
             Result.Invalid()
