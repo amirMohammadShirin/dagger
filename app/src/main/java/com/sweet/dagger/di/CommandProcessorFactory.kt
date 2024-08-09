@@ -10,7 +10,8 @@ import javax.inject.Singleton
         LoginModule::class,
         OutPutterModule::class,
         HelloWordModule::class,
-        UserCommandsRouter.InstallationModule::class
+        UserCommandsRouter.InstallationModule::class,
+        AmountModule::class
     ]
 )
 interface CommandProcessorFactory {
